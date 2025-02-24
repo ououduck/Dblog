@@ -3,7 +3,7 @@ body {
     font-family: "Arial", sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4f4;
+    background-color: #f4f4f4;
     line-height: 1.6;
 }
 
@@ -14,7 +14,7 @@ header {
     text-align: center;
     border-radius: 0 0 15px 15px; /* 圆角效果 */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 阴影效果 */
-    background-color: #333; /* 添加背景颜色 */
+    background-color: #007BFF; /* 添加背景颜色 */
 }
 
 header h1 {
@@ -29,6 +29,7 @@ header h2, header h3 {
     animation: fadeIn 2s ease forwards;
 }
 
+/* 导航栏样式 */
 nav {
     display: flex;
     overflow-x: auto; /* 横向滑动 */
@@ -125,7 +126,7 @@ main {
 
 #link-application button {
     padding: 0.5em 1em;
-    background-color: #333;
+    background-color: #007BFF;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -134,14 +135,14 @@ main {
 }
 
 #link-application button:hover {
-    background-color: #555;
+    background-color: #0056b3;
 }
 
 /* 底部样式 */
 footer {
     text-align: center;
     padding: 1em 0;
-    background-color: #333;
+    background-color: #007BFF;
     color: #fff;
     margin-top: 2em;
     transition: background-color 0.3s ease;
