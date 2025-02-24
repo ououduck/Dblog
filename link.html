@@ -11,33 +11,30 @@
         <h1>D的日记</h1>
         <h2>D工作室的主站点</h2>
         <h3>自研极简静态博客</h3>
-<nav>
-    <ul>
-        <li><a href="index.html">📝 首页</a></li>
-        <li><a href="subsites.html">🌐 旗下站点</a></li>
-        <li><a href="link.html">🔗 友链</a></li>
-        <li><a href="contact.html">📮 联系</a></li>
-        <li><a href="about.html">ℹ️ 关于</a></li>
-    </ul>
-</nav>
+        <nav>
+            <ul>
+                <li><a href="index.html">📝 首页</a></li>
+                <li><a href="subsites.html">🌐 旗下站点</a></li>
+                <li><a href="link.html">🔗 友链</a></li>
+                <li><a href="contact.html">📮 联系</a></li>
+                <li><a href="about.html">ℹ️ 关于</a></li>
+            </ul>
+        </nav>
     </header>
 
     <main>
         <section>
             <h2>友链</h2>
             <p>这里是友链的网站列表：</p>
-    <ul id="link-list" class="link-grid">
-    <li class="link-card">
-        <a href="https://eyun.xyz" target="_blank">
-            <h3>Eyun</h3>
-            <p>eca工作室官网</p>
-            <div class="link-meta">非盈利 | 技术支持</div>
-        </a>
-    </li>
-</ul>
+            <ul id="link-list" class="link-grid">
+                <li class="link-card">
+                    <a href="https://eyun.xyz" target="_blank">
+                        <h3>Eyun</h3>
+                        <p>eca工作室官网</p>
+                        <div class="link-meta">非盈利 | 技术支持</div>
+                    </a>
+                </li>
 
-    <li><a href="https://qinghuany.cn" target="_blank">清欢云 - 一家以跑路为基本业务的公益云</a></li>
-    <br><br><br>
             </ul>
         </section>
 
@@ -78,7 +75,7 @@
             const linkDescription = document.getElementById("link-description").value;
             const linkProfit = document.getElementById("link-profit").value;
 
-            // 将友链信息保存到 link.txt
+       
             const linkInfo = `${linkUrl} | ${linkName} | ${linkDescription} | ${linkProfit}\n`;
             const blob = new Blob([linkInfo], { type: "text/plain" });
             const url = URL.createObjectURL(blob);
@@ -90,6 +87,12 @@
 
             alert("友链申请书已下载，发送给duck(duck@dduck.fun/2472652060@qq.com)等待审核即可哦，通过后记得给我们一个友链哦");
             document.getElementById("link-application").reset();
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            document.body.classList.add("loaded");
+ 
+            
         });
     </script>
 </body>

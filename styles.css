@@ -120,7 +120,7 @@ select#category-filter {
     padding: 0.5em;
     border-radius: 5px;
     border: 1px solid var(--border-color);
-    background: linear-gradient(45deg, var(--secondary-color), #00FF7F);
+    background: linear-gradient(45deg, var(--secondary-color), #f8f9fa);
     color: #fff;
     font-weight: bold;
     transition: background-color 0.3s ease, color 0.3s ease;
@@ -181,8 +181,8 @@ select#category-filter option {
 }
 
 .site-icon {
-    width: 32px;
-    height: 32px;
+    width: 128px;
+    height: 128px;
     margin-right: 0.5rem;
 }
 
@@ -266,4 +266,50 @@ footer a:hover {
     .site-icon {
         margin-bottom: 0.5rem;
     }
+}
+
+/* 图片样式 */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: auto;
+    border-radius: 5px; /* 圆角效果 */
+}
+/* 友链申请组件样式 */
+#link-application {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    max-width: 400px;
+    margin: 2em auto;
+    padding: 1em;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#link-application label {
+    font-weight: bold;
+}
+
+#link-application input, #link-application textarea, #link-application select {
+    width: 100%;
+    padding: 0.5em;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+#link-application button {
+    padding: 0.5em 1em;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#link-application button:hover {
+    background-color: #0056b3;
 }
