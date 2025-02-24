@@ -1,0 +1,208 @@
+/* 基础样式 */
+body {
+    font-family: "Arial", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4f4;
+    line-height: 1.6;
+}
+
+/* 头部样式 */
+header {
+    color: #fff;
+    padding: 1.5em 0;
+    text-align: center;
+    border-radius: 0 0 15px 15px; /* 圆角效果 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+    background-color: #333; /* 添加背景颜色 */
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin: 0;
+    animation: fadeIn 2s ease forwards;
+}
+
+header h2, header h3 {
+    font-weight: normal;
+    opacity: 0.8;
+    animation: fadeIn 2s ease forwards;
+}
+
+nav {
+    display: flex;
+    overflow-x: auto; /* 横向滑动 */
+    white-space: nowrap; /* 防止换行 */
+    scrollbar-width: none; /* 隐藏滚动条 */
+}
+
+nav::-webkit-scrollbar {
+    display: none; /* 隐藏滚动条*/
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 1em; /* 按钮间距 */
+}
+
+nav ul li {
+    display: inline-block;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ddd;
+}
+
+/* 主内容区域 */
+main {
+    padding: 2em;
+    background: #fff;
+    border-radius: 15px; /* 圆角效果 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+    margin: 1em;
+    transition: box-shadow 0.3s ease;
+}
+
+.post-list {
+    max-width: 800px;
+    margin: auto;
+}
+
+.post {
+    margin-bottom: 1em;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 1em;
+    transition: border-color 0.3s ease;
+}
+
+.post h3 {
+    margin: 0 0 0.5em;
+    animation: fadeIn 2s ease forwards;
+}
+
+.post p {
+    margin: 0 0 1em;
+    opacity: 0.8;
+    animation: fadeIn 2s ease forwards;
+}
+
+/* 友链申请组件样式 */
+#link-application {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    max-width: 400px;
+    margin: 2em auto;
+    padding: 1em;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#link-application label {
+    font-weight: bold;
+}
+
+#link-application input, #link-application textarea, #link-application select {
+    width: 100%;
+    padding: 0.5em;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+#link-application button {
+    padding: 0.5em 1em;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#link-application button:hover {
+    background-color: #555;
+}
+
+/* 底部样式 */
+footer {
+    text-align: center;
+    padding: 1em 0;
+    background-color: #333;
+    color: #fff;
+    margin-top: 2em;
+    transition: background-color 0.3s ease;
+}
+
+footer a {
+    color: #ddd;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #fff;
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    header {
+        padding: 1em;
+    }
+
+    nav ul {
+        padding: 0;
+    }
+
+    nav ul li {
+        display: inline-block;
+        margin: 0 0.5em;
+    }
+
+    main {
+        padding: 1em;
+    }
+
+    .post-list {
+        padding: 0.5em;
+    }
+
+    select {
+        width: 100%;
+        margin-bottom: 1em;
+    }
+}
+
+/* 图片样式 */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: auto;
+    border-radius: 5px; /* 圆角效果 */
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>友链 - D的日记</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>D的日记</h1>
+        <h2>D工作室的主站点</h2>
+        <h3>自研极简静态博客</h3>
+        <nav>
+            <ul>
+                <li><a href="index.html">首页</a></li>
+                <li><a href="subsites.html">旗下站点</a></li>
+                <li><a href="link.html">友链</a></li>
+                <li><a href="contact.html">联系</a></li>
+                <li><a href="about.html">关于</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>友链</h2>
+            <p>这里是友链的网站列表：</p>
+            <ul id="link-list">
+    <li><a href="https://eyun.xyz" target="_blank">Eyun(eca官网) - eca工作室多次对D工作室提供技术支持</a></li>
+    <li><a href="https://qinghuany.cn" target="_blank">清欢云 - 一家以跑路为基本业务的公益云</a></li>
+    <br><br><br>
+            </ul>
+        </section>
+
+        <section>
+            <h2>快来申请友链</h2>
+            <form id="link-application">
+                <label for="link-url">网站链接 (带https):</label>
+                <input type="url" id="link-url" name="link-url" required><br><br>
+
+                <label for="link-name">网站名称:</label>
+                <input type="text" id="link-name" name="link-name" required><br><br>
+
+                <label for="link-description">网站简介:</label>
+                <textarea id="link-description" name="link-description" required></textarea><br><br>
+
+                <label for="link-profit">是否盈利:</label>
+                <select id="link-profit" name="link-profit">
+                    <option value="是">是</option>
+                    <option value="否">否</option>
+                </select><br><br>
+
+                <button type="submit">下载申请书</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 D工作室&duck. All rights reserved.</p>
+        <p><a href="https://beian.miit.gov.cn" target="_blank">湘ICP备2025101669号-1</a></p>
+    </footer>
+
+    <script>
+        document.getElementById("link-application").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const linkUrl = document.getElementById("link-url").value;
+            const linkName = document.getElementById("link-name").value;
+            const linkDescription = document.getElementById("link-description").value;
+            const linkProfit = document.getElementById("link-profit").value;
+
+            // 将友链信息保存到 link.txt
+            const linkInfo = `${linkUrl} | ${linkName} | ${linkDescription} | ${linkProfit}\n`;
+            const blob = new Blob([linkInfo], { type: "text/plain" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "link.txt";
+            a.click();
+            URL.revokeObjectURL(url);
+
+            alert("友链申请书已下载，发送给duck(duck@dduck.fun/2472652060@qq.com)等待审核即可哦，通过后记得给我们一个友链哦");
+            document.getElementById("link-application").reset();
+        });
+    </script>
+</body>
+</html>
