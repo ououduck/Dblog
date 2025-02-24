@@ -14,7 +14,7 @@ header {
     text-align: center;
     border-radius: 0 0 15px 15px; /* 圆角效果 */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 阴影效果 */
-    background-color: #007BFF; /* 添加背景颜色 */
+    background: linear-gradient(45deg, #007BFF, #00FF7F); /* 添加渐变背景颜色 */
 }
 
 header h1 {
@@ -142,7 +142,7 @@ main {
 footer {
     text-align: center;
     padding: 1em 0;
-    background-color: #007BFF;
+    background: linear-gradient(45deg, #007BFF, #00FF7F); /* 添加渐变背景颜色 */
     color: #fff;
     margin-top: 2em;
     transition: background-color 0.3s ease;
@@ -156,6 +156,22 @@ footer a {
 
 footer a:hover {
     color: #fff;
+}
+
+/* 分类选择框样式 */
+select#category-filter {
+    padding: 0.5em;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background: linear-gradient(45deg, #007BFF, #00FF7F); /* 添加渐变背景颜色 */
+    color: #fff;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+select#category-filter option {
+    background-color: #fff;
+    color: #000;
 }
 
 /* 动画效果 */
