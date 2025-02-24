@@ -1,5 +1,5 @@
 ### by.[D工作室&duck]
-### 演示站点 [ououduck.github.io/Dblog/]
+### 演示站点 [https://ououduck.github.io/Dblog/]
 #
 # 简介
 # Dblog
@@ -17,4 +17,4 @@
 
 [https://ououduck.github.io/Dblog/]:https://ououduck.github.io/Dblog/
 [D工作室&duck]:https://www.dduck.fun
-
+[D的日记]:https://www.dduck.fun
