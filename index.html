@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D的日记</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+
+<!--顶部公告栏-->
+<div class="不需要">
+    <marquee behavior="scroll" direction="left">
+        此网站还处于beta阶段 正在努力开发中…… 待到整个项目稳定后我们会将其开源
+    </marquee>
+</div>
+
+    <header>
+        <h1>D的日记</h1>
+        <h2>D工作室的主站点</h2>
+<nav>
+    <ul>
+        <li><a href="/index.html" onclick="router(event)">📝 首页</a></li>
+        <li><a href="/subsites.html" onclick="router(event)">🌐 旗下站点</a></li>
+        <li><a href="/link.html" onclick="router(event)">🔗 友链</a></li>
+        <li><a href="/contact.html" onclick="router(event)">📮 联系</a></li>
+        <li><a href="/about.html" onclick="router(event)">ℹ️ 关于</a></li>
+    </ul>
+</nav>
+    </header>
+
+    <main>
+        <section>
+            <select id="category-filter" onchange="filterPosts()">
+                <option value="">所有分类</option>
+                <option value="日记">日记</option>
+                <option value="教程">教程</option>
+                <option value="分享">分享</option>
+            </select>
+        </section>
+        <section class="post-list">
+            <h2>-----Posts-----</h2>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 D工作室&duck. All rights reserved.</p>
+        <p><a href="https://beian.miit.gov.cn" target="_blank">湘ICP备2025101669号-1</a></p>
+    </footer>
+
+    <script>
+        async function loadPosts() {
+            try {
+                const response = await fetch("posts.json");
+                if (!response.ok) {
+                    throw new Error("Failed to fetch posts");
+                }
+                const posts = await response.json();
+                window.posts = posts;
+
+                const postList = document.querySelector(".post-list");
+                postList.innerHTML = "<h2>-----Posts-----</h2>";
+
+                posts.forEach(post => {
+                    const postElement = document.createElement("article");
+                    postElement.className = "post";
+                    postElement.innerHTML = `
+                        <h3><a href="${post.url}"onclick="router(event)">${post.title}</a></h3>
+                        <p>分类: ${post.category}</p>
+                        <p>时间: ${post.time}</p>
+                        <p>${post.content}</p>
+                    `;
+                    postList.appendChild(postElement);
+                });
+            } catch (error) {
+                console.error("Error loading posts:", error);
+                const postList = document.querySelector(".post-list");
+                postList.innerHTML = "<p>加载文章列表时发生错误</p>";
+            }
+        }
+
+        function filterPosts() {
+            const selectedCategory = document.getElementById("category-filter").value;
+            const postList = document.querySelector(".post-list");
+            postList.innerHTML = "<h2>-----Posts-----</h2>";
+
+            window.posts.forEach(post => {
+                if (!selectedCategory || post.category === selectedCategory) {
+                    const postElement = document.createElement("article");
+                    postElement.className = "post";
+                    postElement.innerHTML = `
+                        <h3><a href="${post.url}"onclick="router(event)">${post.title}</a></h3>
+                        <p>分类: ${post.category}</p>
+                        <p>时间: ${post.time}</p>
+                        <p>${post.content}</p>
+                    `;
+                    postList.appendChild(postElement);
+                }
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            document.body.classList.add("loaded");
+            loadPosts();
+        });
+      
+         async function router(event) {
+           event.preventDefault();
+           const url = event.target.href;
+           const response = await fetch(url);
+           const html = await response.text();
+           const parser = new DOMParser();
+           const doc = parser.parseFromString(html, 'text/html');
+           const newContent = doc.querySelector('main').innerHTML;
+           document.querySelector('main').innerHTML = newContent;
+           window.history.pushState({}, '', url);
+
+         // 重新加载文章列表
+         loadPosts();
+        }
+
+
+       window.addEventListener('popstate', async () => {
+       const response = await fetch(window.location.href);
+       const html = await response.text();
+       const parser = new DOMParser();
+       const doc = parser.parseFromString(html, 'text/html');
+       document.querySelector('main').innerHTML = doc.querySelector('main').innerHTML;
+       loadMusicPlayer();
+            });
+
+       function loadMusicPlayer() {
+    // 如果需要，可以在这里恢复音乐播放器的状态
+    // 例如，从 sessionStorage 或 localStorage 中读取播放进度
+       }
+
+    </script>
+
+    <!-- 引入小枫播放器 -->
+    <script src="/xf-MusicPlayer/js/xf-MusicPlayer.min.js"></script>          
+     <!-- 配置小枫播放器 -->
+<!--  这是本地版 <div id="xf-MusicPlayer"  data-localMusic="playData.json"></div>-->
+<!--<div id="xf-MusicPlayer"  data-songList="26467411"></div>歌单版-->
+<div id="xf-MusicPlayer"  data-songChart="热歌榜" data-fadeOutAutoplay data-themeColor="xf-sky"></div><!--榜单版-->
+
+</body>
+</html>

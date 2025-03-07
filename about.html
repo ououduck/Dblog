@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于 - D的日记</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+<!--顶部公告栏-->
+<div class="不需要">
+    <marquee behavior="scroll" direction="left">
+        此网站还处于beta阶段 正在努力开发中…… 待到整个项目稳定后我们会将其开源
+    </marquee>
+</div>
+
+    <header>
+        <h1>D的日记</h1>
+        <h2>D工作室的主站点</h2>
+        
+    <nav>
+    <ul>
+        <li><a href="/index.html" onclick="router(event)">📝 首页</a></li>
+        <li><a href="/subsites.html" onclick="router(event)">🌐 旗下站点</a></li>
+        <li><a href="/link.html" onclick="router(event)">🔗 友链</a></li>
+        <li><a href="/contact.html" onclick="router(event)">📮 联系</a></li>
+        <li><a href="/about.html" onclick="router(event)">ℹ️ 关于</a></li>
+    </ul>
+</nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>关于D工作室</h2>
+            <p>D工作室设立于2024.7</p>
+            <ui>
+            由duck创立 属于个人非盈利小型工作室<br>
+            于2025.1购买dduck.fun域名<br>
+            域名意义为：d duck .fun  "d"是D工作室 "duck"就是duck<br>
+            此外我们还有 dduck.us.kg  duckduck.us.kg ouduck.us.kg 等免费域名为备用域名<br>
+            如果您支持我们 可以向我们捐赠以让我们拿回每月服务器费用45元<br>
+            捐赠名单：<br>
+            
+            <p><img src="https://img.picui.cn/free/2025/02/18/67b35d56990a2.png" alt="微信赞赏码.png" title="微信赞赏码.png" /></p>
+            </ui>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 D工作室&duck. All rights reserved.</p>
+        <p><a href="https://beian.miit.gov.cn" target="_blank">湘ICP备2025101669号-1</a></p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.body.classList.add("loaded");
+
+        });
+        
+        async function router(event) {
+           event.preventDefault();
+           const url = event.target.href;
+           const response = await fetch(url);
+           const html = await response.text();
+           const parser = new DOMParser();
+           const doc = parser.parseFromString(html, 'text/html');
+           const newContent = doc.querySelector('main').innerHTML;
+           document.querySelector('main').innerHTML = newContent;
+           window.history.pushState({}, '', url);
+        }
+
+
+       window.addEventListener('popstate', async () => {
+       const response = await fetch(window.location.href);
+       const html = await response.text();
+       const parser = new DOMParser();
+       const doc = parser.parseFromString(html, 'text/html');
+       document.querySelector('main').innerHTML = doc.querySelector('main').innerHTML;
+       loadMusicPlayer();
+            });
+
+       function loadMusicPlayer() {
+    // 如果需要，可以在这里恢复音乐播放器的状态
+    // 例如，从 sessionStorage 或 localStorage 中读取播放进度
+       }
+        
+    </script>
+       
+      <!-- 引入小枫播放器 -->
+    <script src="/xf-MusicPlayer/js/xf-MusicPlayer.min.js"></script>          
+     <!-- 配置小枫播放器 -->
+<!--  这是本地版 <div id="xf-MusicPlayer"  data-localMusic="playData.json"></div>-->
+<!--<div id="xf-MusicPlayer"  data-songList="26467411"></div>歌单版-->
+<div id="xf-MusicPlayer"  data-songChart="热歌榜" data-fadeOutAutoplay data-themeColor="xf-sky"></div><!--榜单版-->
+
+</body>
+</html>

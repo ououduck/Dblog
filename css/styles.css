@@ -1,0 +1,419 @@
+/* 根变量定义 */
+:root {
+    --primary-color: #2c3e50;       /* 主要文字颜色 */
+    --secondary-color: #3498db;     /* 次要颜色（用于链接、按钮等） */
+    --light-gray: #f8f9fa;          /* 浅灰色背景 */
+    --dark-background: #333;        /* 深色背景（用于部分组件） */
+    --border-color: #ddd;           /* 边框颜色 */
+    --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+    --card-bg: #fff;
+    --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 全局样式 */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    color: var(--primary-color);
+    background-color: var(--light-gray);
+    transition: background-color 0.3s;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+body.loaded {
+    opacity: 1;
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 头部样式 */
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+    border-bottom: 2px solid var(--secondary-color);
+    animation: fadeIn 1s ease forwards;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+header h2 {
+    font-weight: normal;
+    opacity: 0.8;
+}
+
+/* 导航栏样式 */
+nav ul {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    padding: 1rem 0;
+    list-style: none;
+}
+
+nav a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s, background-color 0.3s;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+}
+
+nav a:hover {
+    color: var(--secondary-color);
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* 主内容区域 */
+main {
+    padding: 2em;
+    background: transparent;
+    box-shadow: none;
+    margin: 1em;
+}
+
+.post-list {
+    max-width: 800px;
+    margin: auto;
+}
+
+.post {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid var(--border-color);
+}
+
+.post:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 分类选择框样式 */
+select#category-filter {
+    padding: 0.5em;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    background: linear-gradient(45deg, var(--secondary-color), #f8f9fa);
+    color: #fff;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.post h3 {
+    margin: 0 0 0.5em;
+    animation: fadeIn 1s ease forwards;
+}
+
+.post p {
+    margin: 0 0 1em;
+    opacity: 0.8;
+    animation: fadeIn 1s ease forwards;
+}
+
+
+
+select#category-filter option {
+    background-color: #fff;
+    color: #000;
+}
+
+/* 友链页面样式 */
+.link-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.link-card {
+  background: var(--card-bg);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.link-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* 卡片悬浮装饰线 */
+.link-card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--secondary-color);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.link-card:hover::after {
+  transform: scaleX(1);
+}
+
+/* 文字样式优化 */
+.link-card h3 {
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  margin-bottom: 0.75rem;
+  transition: color 0.3s ease;
+}
+
+.link-card p {
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+.link-meta {
+  font-size: 0.85rem;
+  color: var(--secondary-color);
+  padding: 4px 8px;
+  background: rgba(52, 152, 219, 0.1);
+  border-radius: 4px;
+  display: inline-block;
+}
+
+/* 旗下站点页面样式 */
+.site-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.site-card {
+  background: var(--card-bg);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.site-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* 卡片悬浮装饰线 */
+.site-card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--secondary-color);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.site-card:hover::after {
+  transform: scaleX(1);
+}
+
+/* 文字样式优化 */
+.site-card h3 {
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  margin-bottom: 0.75rem;
+  transition: color 0.3s ease;
+}
+
+.site-card p {
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+.site-meta {
+  font-size: 0.85rem;
+  color: var(--secondary-color);
+  padding: 4px 8px;
+  background: rgba(52, 152, 219, 0.1);
+  border-radius: 4px;
+  display: inline-block;
+}
+
+/* 分页指示器样式 */
+.pagination {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.pagination span, .pagination a {
+    display: inline-block;
+    margin: 0 0.5rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.pagination a:hover {
+    color: var(--secondary-color);
+}
+
+/* 底部样式 */
+footer {
+    text-align: center;
+    margin-top: 3rem;
+    padding: 1rem;
+    color: #666;
+    border-top: 1px solid var(--border-color);
+    animation: fadeIn 1s ease forwards;
+}
+
+footer a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: var(--primary-color);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        gap: 0.8rem;
+    }
+
+    .post-list h2 {
+        font-size: 1.2rem;
+    }
+
+    .link-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .site-grid {
+        grid-template-columns: 1fr;
+    }
+    .subsite {
+        flex-direction: column;
+    }
+    .container {
+        width: 90%;
+        margin: 100px auto;
+    }
+        nav ul {
+        gap: 0.5rem;
+        padding: 0.5rem 0;
+    }
+
+    nav a {
+        padding: 0.3rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    /* 文章卡片优化 */
+    .post {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    /* 分类选择框 */
+    #category-filter {
+        max-width: 100%;
+    }
+}
+
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .post h3 {
+        font-size: 1.1rem;
+    }
+
+    .post p {
+        font-size: 0.9rem;
+    }
+    .container {
+        width: 95%;
+        margin: 20px auto;
+    }
+}
+
+/* 图片样式 */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: auto;
+    border-radius: 5px; /* 圆角效果 */
+}
+/* 友链申请组件样式 */
+#link-application {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    max-width: 400px;
+    margin: 2em auto;
+    padding: 1em;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#link-application label {
+    font-weight: bold;
+}
+
+#link-application input, #link-application textarea, #link-application select {
+    width: 100%;
+    padding: 0.5em;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+#link-application button {
+    padding: 0.5em 1em;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#link-application button:hover {
+    background-color: #3498db;
+}
+
