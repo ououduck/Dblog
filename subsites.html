@@ -11,7 +11,7 @@
 <!--顶部公告栏-->
 <div class="不需要">
     <marquee behavior="scroll" direction="left">
-        此网站还处于beta阶段 正在努力开发中…… 待到整个项目稳定后我们会将其开源
+        此网站还处于beta阶段 正在努力开发中…… 已在giuhub开源 https://github.com/ououduck/Dblog
     </marquee>
 </div>
 
@@ -54,12 +54,13 @@
     <footer>
         <p>&copy; 2025 D工作室&duck. All rights reserved.</p>
         <p><a href="https://beian.miit.gov.cn" target="_blank">湘ICP备2025101669号-1</a></p>
+            <button class="theme-toggle" onclick="toggleTheme()">切换主题</button>
     </footer>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             document.body.classList.add("loaded");
-           
+            applyTheme();           
         });
         
         async function router(event) {
@@ -88,6 +89,17 @@
     // 如果需要，可以在这里恢复音乐播放器的状态
     // 例如，从 sessionStorage 或 localStorage 中读取播放进度
        }
+           function toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute("data-theme");
+        const newTheme = currentTheme === "dark" ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", newTheme);
+        localStorage.setItem("theme", newTheme);
+    }
+
+    function applyTheme() {
+        const savedTheme = localStorage.getItem("theme") || "light";
+        document.documentElement.setAttribute("data-theme", savedTheme);
+    }
     </script>
        
     <!-- 引入小枫播放器 -->
@@ -95,7 +107,7 @@
      <!-- 配置小枫播放器 -->
 <!--  这是本地版 <div id="xf-MusicPlayer"  data-localMusic="playData.json"></div>-->
 <!--<div id="xf-MusicPlayer"  data-songList="26467411"></div>歌单版-->
-<div id="xf-MusicPlayer"  data-songChart="热歌榜" data-fadeOutAutoplay data-themeColor="xf-sky"></div><!--榜单版-->
+<div id="xf-MusicPlayer"  data-randomSongList="1" data-fadeOutAutoplay data-themeColor="xf-sky" data-random="true" data-memory="1"></div><!--榜单版-->
 
 </body>
 </html>
