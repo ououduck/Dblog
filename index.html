@@ -8,16 +8,15 @@
 </head>
 
 <body>
-<!--顶部公告栏-->
-<div class="不需要">
-    <marquee behavior="scroll" direction="left">
-        此网站还处于beta阶段 正在努力开发中…… 已在giuhub开源 https://github.com/ououduck/Dblog
-    </marquee>
-</div>
 
 <header>
-    <h1>D的日记</h1>
-    <h2>D工作室的主站点</h2>
+    <div class="header-content">
+        <img src="/image/header.png" alt="header" class="header">
+        <h1>D的日记</h1>
+        <p>D工作室的主站点</p>
+    </div>
+</header>
+
 <nav>
     <ul>
         <li><a href="/index.html" onclick="router(event)">📝 首页</a></li>
@@ -27,7 +26,6 @@
         <li><a href="/about.html" onclick="router(event)">ℹ️ 关于</a></li>
     </ul>
 </nav>
-</header>
 
 <main>
     <section>
@@ -39,8 +37,13 @@
         </select>
     </section>
     <section class="post-list">
-        <h2>-----Posts-----</h2>
+        <h2>文章列表</h2>
     </section>
+    <div class="pagination">
+        <button id="prev-page" onclick="changePage(-1)">上一页</button>
+        <span id="page-info"></span>
+        <button id="next-page" onclick="changePage(1)">下一页</button>
+    </div>
 </main>
 
 <footer>
@@ -50,6 +53,9 @@
 </footer>
 
 <script>
+    let currentPage = 1;
+    const postsPerPage = 5;
+
     async function loadPosts() {
         try {
             const response = await fetch("posts.json");
@@ -58,46 +64,65 @@
             }
             const posts = await response.json();
             window.posts = posts;
-
-            const postList = document.querySelector(".post-list");
-            postList.innerHTML = "<h2>-----Posts-----</h2>";
-
-            posts.forEach(post => {
-                const postElement = document.createElement("article");
-                postElement.className = "post";
-                postElement.innerHTML = `
-                    <h3><a href="${post.url}"onclick="router(event)">${post.title}</a></h3>
-                    <p>分类: ${post.category}</p>
-                    <p>时间: ${post.time}</p>
-                    <p>${post.content}</p>
-                `;
-                postList.appendChild(postElement);
-            });
+            displayPosts();
         } catch (error) {
             console.error("Error loading posts:", error);
-            const postList = document.querySelector(".post-list");
-            postList.innerHTML = "<p>加载文章列表时发生错误</p>";
+            document.querySelector(".post-list").innerHTML = "<p>加载文章列表时发生错误</p>";
         }
+    }
+
+    function displayPosts() {
+        const postList = document.querySelector(".post-list");
+        postList.innerHTML = "<h2>文章列表</h2>";
+
+        const start = (currentPage - 1) * postsPerPage;
+        const end = start + postsPerPage;
+        const paginatedPosts = window.posts.slice(start, end);
+
+        paginatedPosts.forEach(post => {
+            const postElement = document.createElement("article");
+            postElement.className = "post";
+            const img = new Image();
+            img.src = post.cover;
+            img.alt = `${post.title} 封面`;
+            img.className = "cover";
+            img.onerror = () => {
+                img.src = "/image/post-cover/default-cover.jpg"; // 默认封面图片路径
+            };
+            postElement.appendChild(img);
+            const postContent = document.createElement("div");
+            postContent.className = "post-content";
+            postContent.innerHTML = `
+                <h3><a href="${post.url}" onclick="router(event)">${post.title}</a></h3>
+                <p>${post.content}</p>
+                <p>发布于 ${post.time}</p>
+            `;
+            postElement.appendChild(postContent);
+            postList.appendChild(postElement);
+        });
+
+        updatePagination();
+    }
+
+    function updatePagination() {
+        const pageInfo = document.getElementById("page-info");
+        const totalPages = Math.ceil(window.posts.length / postsPerPage);
+        pageInfo.textContent = `第 ${currentPage} 页，共 ${totalPages} 页`;
+
+        document.getElementById("prev-page").disabled = currentPage === 1;
+        document.getElementById("next-page").disabled = currentPage === totalPages;
+    }
+
+    function changePage(direction) {
+        currentPage += direction;
+        displayPosts();
     }
 
     function filterPosts() {
         const selectedCategory = document.getElementById("category-filter").value;
-        const postList = document.querySelector(".post-list");
-        postList.innerHTML = "<h2>-----Posts-----</h2>";
-
-        window.posts.forEach(post => {
-            if (!selectedCategory || post.category === selectedCategory) {
-                const postElement = document.createElement("article");
-                postElement.className = "post";
-                postElement.innerHTML = `
-                    <h3><a href="${post.url}"onclick="router(event)">${post.title}</a></h3>
-                    <p>分类: ${post.category}</p>
-                    <p>时间: ${post.time}</p>
-                    <p>${post.content}</p>
-                `;
-                postList.appendChild(postElement);
-            }
-        });
+        window.posts = window.posts.filter(post => !selectedCategory || post.category === selectedCategory);
+        currentPage = 1;
+        displayPosts();
     }
 
     document.addEventListener("DOMContentLoaded", () => {
@@ -122,17 +147,17 @@
     }
 
     window.addEventListener('popstate', async () => {
-    const response = await fetch(window.location.href);
-    const html = await response.text();
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, 'text/html');
-    document.querySelector('main').innerHTML = doc.querySelector('main').innerHTML;
-    loadMusicPlayer();
-         });
+        const response = await fetch(window.location.href);
+        const html = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        document.querySelector('main').innerHTML = doc.querySelector('main').innerHTML;
+        loadMusicPlayer();
+    });
 
     function loadMusicPlayer() {
- // 如果需要，可以在这里恢复音乐播放器的状态
- // 例如，从 sessionStorage 或 localStorage 中读取播放进度
+        // 如果需要，可以在这里恢复音乐播放器的状态
+        // 例如，从 sessionStorage 或 localStorage 中读取播放进度
     }
 
     function toggleTheme() {

@@ -10,11 +10,19 @@
     --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* 全局样式 */
+[data-theme="dark"] {
+    --primary-color: #ecf0f1;
+    --secondary-color: #9b59b6;
+    --light-gray: #000; 
+    --dark-background: #2c3e50;
+    --border-color: #555;
+    --card-bg: #2c3e50;
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     line-height: 1.6;
-    max-width: 800px;
+    max-width: 1200px; /* 增加最大宽度 */
     margin: 0 auto;
     padding: 20px;
     color: var(--primary-color);
@@ -22,6 +30,9 @@ body {
     transition: background-color 0.3s;
     opacity: 0;
     transition: opacity 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 body.loaded {
@@ -40,7 +51,6 @@ body.loaded {
     }
 }
 
-/* 头部样式 */
 header {
     text-align: center;
     margin-bottom: 3rem;
@@ -58,7 +68,43 @@ header h2 {
     opacity: 0.8;
 }
 
-/* 导航栏样式 */
+header h1, header h2 {
+    color: var(--primary-color);
+}
+
+[data-theme="light"] header h1, [data-theme="light"] header h2 {
+    color: #000;
+}
+
+.header-content {
+    text-align: center;
+    padding: 2rem;
+    background: url('/image/header.png') no-repeat center center;
+    background-size: cover;
+    color: white;
+}
+
+.header-content .logo {
+    width: 100px;
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+.header-content h1 {
+    font-size: 3rem;
+    margin: 0;
+}
+
+.header-content p {
+    font-size: 1.5rem;
+    margin: 0;
+    color: var(--primary-color);
+}
+
+[data-theme="light"] .header-content p {
+    color: black;
+}
+
 nav ul {
     display: flex;
     gap: 1.5rem;
@@ -80,7 +126,6 @@ nav a:hover {
     background-color: rgba(255, 255, 255, 0.5);
 }
 
-/* 主内容区域 */
 main {
     padding: 2em;
     background: transparent;
@@ -91,16 +136,60 @@ main {
 .post-list {
     max-width: 800px;
     margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
 }
 
 .post {
-    background: #fff;
+    background: var(--card-bg);
     border-radius: 12px;
-    padding: 1.5rem;
+    padding: 1rem;
     margin-bottom: 1.5rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--card-shadow);
     transition: transform 0.2s, box-shadow 0.2s;
     border: 1px solid var(--border-color);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 calc(45% - 20px);
+    box-sizing: border-box;
+}
+
+.post img.cover {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px;
+}
+
+.post-content {
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.post-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.post-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+post-meta span img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
 }
 
 .post:hover {
@@ -108,7 +197,48 @@ main {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* 分类选择框样式 */
+.post h3 {
+    margin: 0 0 0.5em;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+}
+
+.post p {
+    margin: 0 0 1em;
+    opacity: 0.8;
+    font-size: 0.95rem;
+    color: #666;
+}
+
+.post-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+
+.post-footer .tags {
+    display: none; /* 隐藏标签 */
+}
+
+.post-footer .actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.post-footer .actions span {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.post-footer .actions span img {
+    width: 20px;
+    height: 20px;
+}
+
 select#category-filter {
     padding: 0.5em;
     border-radius: 5px;
@@ -130,14 +260,11 @@ select#category-filter {
     animation: fadeIn 1s ease forwards;
 }
 
-
-
 select#category-filter option {
     background-color: #fff;
     color: #000;
 }
 
-/* 友链页面样式 */
 .link-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -159,7 +286,6 @@ select#category-filter option {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
-/* 卡片悬浮装饰线 */
 .link-card::after {
   content: "";
   position: absolute;
@@ -176,7 +302,6 @@ select#category-filter option {
   transform: scaleX(1);
 }
 
-/* 文字样式优化 */
 .link-card h3 {
   color: var(--primary-color);
   font-size: 1.2rem;
@@ -200,7 +325,6 @@ select#category-filter option {
   display: inline-block;
 }
 
-/* 旗下站点页面样式 */
 .site-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -222,7 +346,6 @@ select#category-filter option {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
-/* 卡片悬浮装饰线 */
 .site-card::after {
   content: "";
   position: absolute;
@@ -239,7 +362,6 @@ select#category-filter option {
   transform: scaleX(1);
 }
 
-/* 文字样式优化 */
 .site-card h3 {
   color: var(--primary-color);
   font-size: 1.2rem;
@@ -263,25 +385,41 @@ select#category-filter option {
   display: inline-block;
 }
 
-/* 分页指示器样式 */
+.daily-quote {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
+    text-align: center;
+    animation: fadeIn 1s ease forwards;
+}
+
 .pagination {
     text-align: center;
     margin-top: 1rem;
 }
 
-.pagination span, .pagination a {
-    display: inline-block;
-    margin: 0 0.5rem;
-    color: var(--primary-color);
-    text-decoration: none;
-    transition: color 0.3s;
+.pagination button {
+    padding: 0.5em 1em;
+    background-color: var(--secondary-color);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.pagination a:hover {
-    color: var(--secondary-color);
+.pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
 }
 
-/* 底部样式 */
+.pagination button:hover:not(:disabled) {
+    background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+}
+
 footer {
     text-align: center;
     margin-top: 3rem;
@@ -301,6 +439,21 @@ footer a:hover {
     color: var(--primary-color);
 }
 
+/* 切换按钮样式 */
+.theme-toggle {
+    padding: 0.5em 1em;
+    background-color: var(--secondary-color);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
     body {
@@ -316,6 +469,10 @@ footer a:hover {
         font-size: 1.2rem;
     }
 
+    .post {
+        flex: 1 1 calc(100% - 20px);
+    }
+
     .link-grid {
         grid-template-columns: 1fr;
     }
@@ -323,14 +480,17 @@ footer a:hover {
     .site-grid {
         grid-template-columns: 1fr;
     }
+
     .subsite {
         flex-direction: column;
     }
+
     .container {
         width: 90%;
         margin: 100px auto;
     }
-        nav ul {
+
+    nav ul {
         gap: 0.5rem;
         padding: 0.5rem 0;
     }
@@ -340,18 +500,19 @@ footer a:hover {
         font-size: 0.9rem;
     }
 
-    /* 文章卡片优化 */
     .post {
         padding: 1rem;
         margin-bottom: 1rem;
     }
 
-    /* 分类选择框 */
     #category-filter {
         max-width: 100%;
     }
-}
 
+    .post img.cover {
+        height: 150px; /* 小屏幕上的高度 */
+    }
+}
 
 @media (max-width: 480px) {
     header h1 {
@@ -365,13 +526,19 @@ footer a:hover {
     .post p {
         font-size: 0.9rem;
     }
+
     .container {
         width: 95%;
         margin: 20px auto;
     }
 }
 
-/* 图片样式 */
+@media (min-width: 1200px) {
+    .post {
+        flex: 1 1 calc(30% - 20px); /* 大屏幕上每行显示三篇文章 */
+    }
+}
+
 img {
     max-width: 100%;
     height: auto;
@@ -379,7 +546,7 @@ img {
     margin: auto;
     border-radius: 5px; /* 圆角效果 */
 }
-/* 友链申请组件样式 */
+
 #link-application {
     display: flex;
     flex-direction: column;
@@ -414,6 +581,32 @@ img {
 }
 
 #link-application button:hover {
-    background-color: #3498db;
+    background-color: #2980b9;
 }
 
+/* 音乐播放器样式 */
+#xf-MusicPlayer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: var(--card-bg);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: transform 0.3s ease;
+}
+
+#xf-MusicPlayer.minimized {
+    transform: translateY(100%);
+}
+
+#xf-MusicPlayer .xf-music-player-toggle {
+    position: absolute;
+    top: -30px;
+    right: 20px;
+    background: var(--secondary-color);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
